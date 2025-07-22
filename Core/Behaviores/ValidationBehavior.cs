@@ -1,0 +1,40 @@
+﻿
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.Localization;
+
+namespace Core.Behaviores
+{
+    public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
+    {
+        private readonly IEnumerable<IValidator<TRequest>> _validators;
+        private readonly IStringLocalizer<TRequest> _Localizer;
+
+        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators, IStringLocalizer<TRequest> Localizer)
+        {
+            _validators = validators;
+            _Localizer = Localizer;
+
+        }
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+            CancellationToken cancellationToken)
+        {
+            if (_validators.Any())
+            {
+                var context = new ValidationContext<TRequest>(request);
+                var validationResults = await Task.WhenAll(_validators.Select
+                    (x => x.ValidateAsync(context, cancellationToken)));
+                var failuers = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
+                if (failuers.Count != 0)
+                {
+                    var message = failuers.Select(x => x.ErrorMessage).FirstOrDefault();
+                    throw new ValidationException(message);
+                }
+
+
+            }
+            return await next();
+        }
+    }
+}
