@@ -10,6 +10,10 @@
         public const string NotEmtpy = "NotEmtpy";
         public const string NotNull = "NotNull";
         public const string Success = "Success";
+        public const string IsExist = "IsExist";
+        public const string DepartmentIsNotExist = "DepartmentIsNotExist";
+
+
 
 
 

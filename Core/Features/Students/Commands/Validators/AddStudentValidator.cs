@@ -11,14 +11,19 @@ namespace Core.Features.Students.Commands.Validators
         #region Fields
         private readonly IStudentService _studentService;
         private readonly IStringLocalizer<SheardResource> _Localizer;
+        private readonly IDepartmentService _departmentservice;
+
 
         #endregion
 
         #region Constructors
-        public AddStudentValidator(IStudentService studentService, IStringLocalizer<SheardResource> Localizer)
+        public AddStudentValidator(IStudentService studentService,
+                                  IStringLocalizer<SheardResource> Localizer,
+                                  IDepartmentService departmentservice)
         {
             _studentService = studentService;
             _Localizer = Localizer;
+            _departmentservice = departmentservice;
 
             ApplayValidationRule();
             ApplyCustomeValidatioonrules();
@@ -38,11 +43,18 @@ namespace Core.Features.Students.Commands.Validators
             .MaximumLength(15).WithMessage("Max Length is 15");
 
         }
+
         public void ApplyCustomeValidatioonrules()
         {
             RuleFor(x => x.NameAR)
                 .MustAsync(async (key, CancellationToken) => !await _studentService.IsNameExist(key))
-                .WithMessage("Name Is Exist");
+                .WithMessage(_Localizer[KeySharedResource.IsExist]);
+            RuleFor(x => x.NameEn)
+              .MustAsync(async (key, CancellationToken) => !await _studentService.IsNameExist(key))
+              .WithMessage(_Localizer[KeySharedResource.IsExist]);
+            RuleFor(x => x.DepartmentId)
+                .MustAsync(async (key, CancellationToken) => await _departmentservice.IsDEpartmentIdExist(key))
+                .WithMessage(_Localizer[KeySharedResource.DepartmentIsNotExist]);
 
         }
         #endregion

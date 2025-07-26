@@ -31,8 +31,6 @@ namespace Core.Behaviores
                     var message = failuers.Select(x => x.ErrorMessage).FirstOrDefault();
                     throw new ValidationException(message);
                 }
-
-
             }
             return await next();
         }
