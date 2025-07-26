@@ -7,6 +7,7 @@ namespace Service.Impelmention
 {
     public class DepartmentService : IDepartmentService
     {
+        //Department Service
         #region Fields
         public readonly IDepartmentRepository _departmentRepository;
         #endregion
