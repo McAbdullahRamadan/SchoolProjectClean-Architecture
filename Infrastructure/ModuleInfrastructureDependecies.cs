@@ -17,6 +17,7 @@ namespace Infrastructure
 
 
 
+
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             return services;
         }
