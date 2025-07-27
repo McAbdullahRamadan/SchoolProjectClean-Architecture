@@ -1,10 +1,14 @@
 ﻿using Data.Entites;
+using Data.Entites.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
+
 namespace Infrastructure.DataContext
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<Users, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public ApplicationDbContext()
         {
@@ -14,7 +18,10 @@ namespace Infrastructure.DataContext
         {
 
         }
+        public DbSet<Users> Users { get; set; }
+
         public DbSet<Department> departments { get; set; }
+
         public DbSet<Student> students { get; set; }
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
         public DbSet<Subject> subjects { get; set; }
