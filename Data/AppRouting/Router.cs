@@ -5,10 +5,10 @@
         public const string SingleRoute = "/{id}";
         public const string root = "Api";
         public const string version = "V1";
-        public const string Role = root + "/" + version + "/";
+        public const string Rule = root + "/" + version + "/";
         public static class StudentRouter
         {
-            public const string Perfix = Role + "Student";
+            public const string Perfix = Rule + "Student";
             public const string list = Perfix + "/List";
             public const string GetById = Perfix + SingleRoute;
             public const string Create = Perfix + "/Create";
@@ -19,8 +19,15 @@
         }
         public static class DepartmentRouter
         {
-            public const string Perfix = Role + "Department";
+            public const string Perfix = Rule + "Department";
             public const string GetbyId = Perfix + "/Id";
+
+
+        }
+        public static class UserRouter
+        {
+            public const string Perfix = Rule + "User";
+            public const string Create = Perfix + "/Create";
 
 
         }

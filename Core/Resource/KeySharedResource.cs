@@ -12,6 +12,24 @@
         public const string Success = "Success";
         public const string IsExist = "IsExist";
         public const string DepartmentIsNotExist = "DepartmentIsNotExist";
+        public const string MinLength = "MinLength";
+        public const string MaxLength = "MaxLength";
+        public const string PasswordNotEqualConfirmPassword = "PasswordNotEqualConfirmPassword";
+        public const string EmailIsExist = "EmailIsExist";
+        public const string UserNameIsExist = "UserNameIsExist";
+        public const string FailedToAddUser = "FailedToAddUser";
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

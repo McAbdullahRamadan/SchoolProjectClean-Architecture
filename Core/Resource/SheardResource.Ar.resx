@@ -126,8 +126,20 @@
   <data name="DepartmentIsNotExist" xml:space="preserve">
     <value>رقم القسم غير موجود</value>
   </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>البريد الالكتروني موجود بالفعل</value>
+  </data>
+  <data name="FailedToAddUser" xml:space="preserve">
+    <value>حدث خطا أثناء أضافة المستخدم</value>
+  </data>
   <data name="IsExist" xml:space="preserve">
     <value>موجود بالفعل</value>
+  </data>
+  <data name="MaxLength" xml:space="preserve">
+    <value>الحد الأقصى للطول هو 16</value>
+  </data>
+  <data name="MinLength" xml:space="preserve">
+    <value>الحد الأدنى للطول هو ۸</value>
   </data>
   <data name="NoFound" xml:space="preserve">
     <value>غير متوفر</value>
@@ -138,6 +150,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>الحقل فارغ</value>
   </data>
+  <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
+    <value>كلمة المرور غير مطابقة</value>
+  </data>
   <data name="Requierd" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
@@ -146,5 +161,8 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>تم الاضافة بنجاح</value>
+  </data>
+  <data name="UserNameIsExist" xml:space="preserve">
+    <value>هذا المستخدم موجود بالفعل</value>
   </data>
 </root>
