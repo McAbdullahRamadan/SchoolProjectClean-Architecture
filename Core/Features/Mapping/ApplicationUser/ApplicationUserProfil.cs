@@ -8,6 +8,7 @@ namespace Core.Features.Mapping.ApplicationUser
         public ApplicationUserProfil()
         {
             AddUserMapping();
+            GetUserPagintedMapping();
 
         }
     }

@@ -14,13 +14,10 @@
 
   <ItemGroup>
     <Folder Include="Features\Department\Command\" />
-    <Folder Include="Features\Mapping\ApplicationUser\Query\" />
     <Folder Include="Features\Mapping\CommandMapp\" />
     <Folder Include="Features\Mapping\DepartmentMapp\CommandMapping\" />
     <Folder Include="Features\Students\Handels\" />
     <Folder Include="Features\UserRegistration\Command\Validator\" />
-    <Folder Include="Features\UserRegistration\Query\Models\" />
-    <Folder Include="Features\UserRegistration\Query\Handle\" />
   </ItemGroup>
 
   <ItemGroup>

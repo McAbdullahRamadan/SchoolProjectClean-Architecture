@@ -28,6 +28,7 @@
         {
             public const string Perfix = Rule + "User";
             public const string Create = Perfix + "/Create";
+            public const string Paginated = Perfix + "/Paginated";
 
 
         }
