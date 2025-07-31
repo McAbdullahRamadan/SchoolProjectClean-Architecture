@@ -22,5 +22,11 @@ namespace SchoolLearnAPI.Controllers
             var response = await Mediator.Send(query);
             return Ok(response);
         }
+        [HttpGet(Router.UserRouter.GetById)]
+        public async Task<IActionResult> GeStudentById([FromRoute] int id)
+        {
+
+            return NewResult(await Mediator.Send(new GetUserByIdQuery(id)));
+        }
     }
 }

@@ -3,7 +3,7 @@ using Core.Resource;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Core.Features.UserRegistration.Command
+namespace Core.Features.UserRegistration.Command.Validator
 {
     public class AddUserValidator : AbstractValidator<AddUserCommand>
     {
