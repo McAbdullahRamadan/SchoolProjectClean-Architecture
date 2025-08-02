@@ -31,6 +31,7 @@
             public const string Paginated = Perfix + "/Paginated";
             public const string GetById = Perfix + SingleRoute;
             public const string Edit = Perfix + "/Edit";
+            public const string Delete = Perfix + "/{id}";
 
 
         }

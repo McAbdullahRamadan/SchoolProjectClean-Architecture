@@ -123,6 +123,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted successfuly</value>
   </data>
+  <data name="DeletedFailed" xml:space="preserve">
+    <value>Delete Operation Failed</value>
+  </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>Email Is Exist</value>
   </data>

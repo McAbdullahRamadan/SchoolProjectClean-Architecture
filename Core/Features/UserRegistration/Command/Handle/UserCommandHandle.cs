@@ -11,7 +11,9 @@ namespace Core.Features.UserRegistration.Command.Handle
 {
     public class UserCommandHandle : ResponseHadlar,
         IRequestHandler<AddUserCommand, Response<string>>,
-        IRequestHandler<EditUserCommand, Response<string>>
+        IRequestHandler<EditUserCommand, Response<string>>,
+        IRequestHandler<DeleteUserCommand, Response<string>>
+
 
     {
         #region Fields
@@ -61,7 +63,7 @@ namespace Core.Features.UserRegistration.Command.Handle
 
         public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
         {
-            //Chack if User is Exist
+            //Check if User is Exist
             var Olduser = await _userManager.FindByIdAsync(request.Id.ToString());
             //return NotFuond
             if (Olduser == null)
@@ -80,6 +82,21 @@ namespace Core.Features.UserRegistration.Command.Handle
 
 
 
+        }
+
+        public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            //Check if User is Exist
+            var user1 = await _userManager.FindByIdAsync(request.Id.ToString());
+            //if Not Exist
+            if (user1 == null)
+                return NotFound<string>();
+            //Deleted
+            var result = await _userManager.DeleteAsync(user1);
+            //check Success Or No
+            if (!result.Succeeded)
+                BadRequst<string>(_Localizer[KeySharedResource.DeletedFailed]);
+            return Success((string)_Localizer[KeySharedResource.Deleted]);
         }
         #endregion
     }
