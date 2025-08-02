@@ -18,6 +18,9 @@
         public const string EmailIsExist = "EmailIsExist";
         public const string UserNameIsExist = "UserNameIsExist";
         public const string FailedToAddUser = "FailedToAddUser";
+        public const string UpdateFailed = "UpdateFailed";
+
+
 
 
 

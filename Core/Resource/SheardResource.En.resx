@@ -156,6 +156,9 @@
   <data name="Update" xml:space="preserve">
     <value>Update Successfully</value>
   </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update Operation Failed</value>
+  </data>
   <data name="UserNameIsExist" xml:space="preserve">
     <value>User Name Is Exist</value>
   </data>

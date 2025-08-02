@@ -10,7 +10,9 @@ using Microsoft.Extensions.Localization;
 namespace Core.Features.UserRegistration.Command.Handle
 {
     public class UserCommandHandle : ResponseHadlar,
-        IRequestHandler<AddUserCommand, Response<string>>
+        IRequestHandler<AddUserCommand, Response<string>>,
+        IRequestHandler<EditUserCommand, Response<string>>
+
     {
         #region Fields
         private readonly IMapper _mapper;
@@ -55,6 +57,29 @@ namespace Core.Features.UserRegistration.Command.Handle
             }
             //return
             return Created("");
+        }
+
+        public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
+        {
+            //Chack if User is Exist
+            var Olduser = await _userManager.FindByIdAsync(request.Id.ToString());
+            //return NotFuond
+            if (Olduser == null)
+                return NotFound<string>();
+            //Mapping
+            var newuser = _mapper.Map(request, Olduser);
+            //Update
+            var result = await _userManager.UpdateAsync(newuser);
+            //Rsult is Not Success
+            if (!result.Succeeded)
+                return BadRequst<string>(_Localizer[KeySharedResource.UpdateFailed]);
+            return Success((string)_Localizer[KeySharedResource.Update]);
+
+
+
+
+
+
         }
         #endregion
     }

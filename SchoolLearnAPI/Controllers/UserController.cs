@@ -28,5 +28,11 @@ namespace SchoolLearnAPI.Controllers
 
             return NewResult(await Mediator.Send(new GetUserByIdQuery(id)));
         }
+        [HttpPut(Router.UserRouter.Edit)]
+        public async Task<IActionResult> Edit([FromBody] EditUserCommand comand)
+        {
+            var response = await Mediator.Send(comand);
+            return NewResult(response);
+        }
     }
 }
