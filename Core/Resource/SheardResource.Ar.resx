@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangePassFailed" xml:space="preserve">
+    <value>فشلت عملية تغير كلمة السر</value>
+  </data>
+  <data name="ChangePassSuccess" xml:space="preserve">
+    <value>تم تغيير كلمة السر بنجاح</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>تم الانشاء بنجاح</value>
   </data>
@@ -153,6 +159,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>الحقل فارغ</value>
   </data>
+  <data name="PasswordIsNotCorrect" xml:space="preserve">
+    <value>كلمة السر غير صحيحة</value>
+  </data>
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>كلمة المرور غير مطابقة</value>
   </data>
@@ -170,5 +179,8 @@
   </data>
   <data name="UserNameIsExist" xml:space="preserve">
     <value>هذا المستخدم موجود بالفعل</value>
+  </data>
+  <data name="UserNameIsinvalid" xml:space="preserve">
+    <value>هذا المستخدم غير موجود </value>
   </data>
 </root>

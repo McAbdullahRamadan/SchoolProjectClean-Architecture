@@ -32,6 +32,13 @@
             public const string GetById = Perfix + SingleRoute;
             public const string Edit = Perfix + "/Edit";
             public const string Delete = Perfix + "/{id}";
+            public const string ChangePassword = Perfix + "/ChangePassword";
+
+        }
+        public static class Authentication
+        {
+            public const string Perfix = Rule + "Authentication";
+            public const string SignIn = Perfix + "/SignIn";
 
 
         }

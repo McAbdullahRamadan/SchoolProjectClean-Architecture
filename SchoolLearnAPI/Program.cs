@@ -1,8 +1,6 @@
 using Core;
-using Data.Entites.Identity;
 using Infrastructure;
 using Infrastructure.DataContext;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -24,32 +22,40 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 //End Connection To SQL
 #region DependencyInjection
 builder.Services.AddInfrastructureDependecies()
-    .AddServiceDependecies().AddCoreDependecies();
+    .AddServiceDependecies().AddCoreDependecies()
+    .AddServiceRegisteration(builder.Configuration);
 #endregion
 #region AddIdentity DependencyInjection
-builder.Services.AddIdentity<UserIdentity, IdentityRole<int>>(options =>
-{
-    // Password settings.
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 8;
-    options.Password.RequiredUniqueChars = 1;
+//builder.Services.AddIdentity<UserIdentity, IdentityRole<int>>(options =>
+//{
+//    // Password settings.
+//    options.Password.RequireDigit = true;
+//    options.Password.RequireLowercase = true;
+//    options.Password.RequireNonAlphanumeric = false;
+//    options.Password.RequireUppercase = true;
+//    options.Password.RequiredLength = 8;
+//    options.Password.RequiredUniqueChars = 1;
 
-    // Lockout settings.
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    options.Lockout.MaxFailedAccessAttempts = 5;
-    options.Lockout.AllowedForNewUsers = true;
+//    // Lockout settings.
+//    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+//    options.Lockout.MaxFailedAccessAttempts = 5;
+//    options.Lockout.AllowedForNewUsers = true;
 
-    // User settings.
-    options.User.AllowedUserNameCharacters =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedEmail = false;
+//    // User settings.
+//    options.User.AllowedUserNameCharacters =
+//    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+//    options.User.RequireUniqueEmail = true;
+//    options.SignIn.RequireConfirmedEmail = false;
 
 
-}).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+//}).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+////Jwt Authentication
+
+//var Config = IConfiguration;
+//var jwtSetting = new jwtSettings();
+//Config.GetSection(nameof(jwtSetting)).Bind(jwtSetting);
+//builder.Services.AddSingleton(jwtSetting);
+
 
 
 
@@ -117,6 +123,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(Cors);
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

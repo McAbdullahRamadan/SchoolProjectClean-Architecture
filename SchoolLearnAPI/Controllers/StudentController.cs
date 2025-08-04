@@ -2,6 +2,7 @@
 using Core.Features.Students.Queries.Handlers;
 using Core.Features.Students.Queries.Models;
 using Data.AppRouting;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolLearnAPI.Base;
 
@@ -12,12 +13,14 @@ namespace SchoolLearnAPI.Controllers
     public class StudentController : AppControllerBase
     {
 
+        [Authorize]
         [HttpGet(Router.StudentRouter.list)]
         public async Task<IActionResult> GetAllStudent()
         {
             var response = await Mediator.Send(new GetListStudentQueries());
             return Ok(response);
         }
+        [AllowAnonymous]
         [HttpGet(Router.StudentRouter.Paginated)]
         public async Task<IActionResult> Paginated([FromQuery] GetStudentPaginatedListQuery query)
         {

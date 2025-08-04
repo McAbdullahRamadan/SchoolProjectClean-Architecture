@@ -5,6 +5,7 @@ using Core.Resource;
 using Data.Entites.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace Core.Features.UserRegistration.Command.Handle
@@ -12,7 +13,9 @@ namespace Core.Features.UserRegistration.Command.Handle
     public class UserCommandHandle : ResponseHadlar,
         IRequestHandler<AddUserCommand, Response<string>>,
         IRequestHandler<EditUserCommand, Response<string>>,
-        IRequestHandler<DeleteUserCommand, Response<string>>
+        IRequestHandler<DeleteUserCommand, Response<string>>,
+        IRequestHandler<ChangePasswordCommand, Response<string>>
+
 
 
     {
@@ -71,17 +74,15 @@ namespace Core.Features.UserRegistration.Command.Handle
             //Mapping
             var newuser = _mapper.Map(request, Olduser);
             //Update
+            //UserName is Exist
+            var UserByUserName = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == newuser.UserName && x.Id != newuser.Id);
+            if (UserByUserName != null)
+                return BadRequst<string>(_Localizer[KeySharedResource.UserNameIsExist]);
+            //Result is Not Success
             var result = await _userManager.UpdateAsync(newuser);
-            //Rsult is Not Success
             if (!result.Succeeded)
                 return BadRequst<string>(_Localizer[KeySharedResource.UpdateFailed]);
             return Success((string)_Localizer[KeySharedResource.Update]);
-
-
-
-
-
-
         }
 
         public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
@@ -97,6 +98,20 @@ namespace Core.Features.UserRegistration.Command.Handle
             if (!result.Succeeded)
                 BadRequst<string>(_Localizer[KeySharedResource.DeletedFailed]);
             return Success((string)_Localizer[KeySharedResource.Deleted]);
+        }
+
+        public async Task<Response<string>> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+        {
+            //Get Users
+            var user1 = await _userManager.FindByIdAsync(request.Id.ToString());
+            //if check user is null
+            if (user1 == null)
+                return NotFound<string>();
+            //Change Password 
+            var result = await _userManager.ChangePasswordAsync(user1, request.CurrentPassword, request.NewPassword);
+            if (!result.Succeeded)
+                return BadRequst<string>(_Localizer[KeySharedResource.ChangePassFailed]);
+            return Success((string)_Localizer[KeySharedResource.ChangePassSuccess]);
         }
         #endregion
     }

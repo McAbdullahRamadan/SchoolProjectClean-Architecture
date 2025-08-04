@@ -20,6 +20,18 @@
         public const string FailedToAddUser = "FailedToAddUser";
         public const string UpdateFailed = "UpdateFailed";
         public const string DeletedFailed = "DeletedFailed";
+        public const string ChangePassFailed = "ChangePassFailed";
+        public const string ChangePassSuccess = "ChangePassSuccess";
+        public const string UserNameIsinvalid = "UserNameIsinvalid";
+        public const string PasswordIsNotCorrect = "PasswordIsNotCorrect";
+
+
+
+
+
+
+
+
 
 
 

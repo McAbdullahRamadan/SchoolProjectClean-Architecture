@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangePassFailed" xml:space="preserve">
+    <value>Change Password Failed</value>
+  </data>
+  <data name="ChangePassSuccess" xml:space="preserve">
+    <value>Change Passًword Successfully</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create Successfully</value>
   </data>
@@ -147,6 +153,9 @@
   <data name="NotNull" xml:space="preserve">
     <value>NotNull</value>
   </data>
+  <data name="PasswordIsNotCorrect" xml:space="preserve">
+    <value>Password Is Not Correct</value>
+  </data>
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>Password does not match</value>
   </data>
@@ -164,5 +173,8 @@
   </data>
   <data name="UserNameIsExist" xml:space="preserve">
     <value>User Name Is Exist</value>
+  </data>
+  <data name="UserNameIsinvalid" xml:space="preserve">
+    <value>UserName Is Invalid</value>
   </data>
 </root>
