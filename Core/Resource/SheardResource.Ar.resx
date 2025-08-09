@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>هناك خطأ في الخوارزمية</value>
+  </data>
   <data name="ChangePassFailed" xml:space="preserve">
     <value>فشلت عملية تغير كلمة السر</value>
   </data>
@@ -165,11 +168,26 @@
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>كلمة المرور غير مطابقة</value>
   </data>
+  <data name="RefreshTokenisExpired" xml:space="preserve">
+    <value>انتهت صلاحية رمز التحديث</value>
+  </data>
+  <data name="RefreshTokenisNotFound" xml:space="preserve">
+    <value>لم يتم العثور على رمز التحديث</value>
+  </data>
   <data name="Requierd" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العملية بنجاح</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>الرمز منتهي الصلاحية</value>
+  </data>
+  <data name="TokenisNotExpired" xml:space="preserve">
+    <value>الرمز غير منتهي الصلاحية</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>غير مصرح به</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>تم الاضافة بنجاح</value>

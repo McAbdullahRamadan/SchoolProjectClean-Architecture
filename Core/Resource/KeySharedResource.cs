@@ -24,6 +24,18 @@
         public const string ChangePassSuccess = "ChangePassSuccess";
         public const string UserNameIsinvalid = "UserNameIsinvalid";
         public const string PasswordIsNotCorrect = "PasswordIsNotCorrect";
+        public const string Unauthorized = "Unauthorized";
+        public const string Algorithm = "AlgorithmIsWrong";
+        public const string TokenisNotExpired = "TokenisNotExpired";
+        public const string RefreshTokenisNotFound = "RefreshTokenisNotFound";
+        public const string RefreshTokenisExpired = "RefreshTokenisExpired";
+        public const string TokenIsExpired = "TokenIsExpired";
+
+
+
+
+
+
 
 
 

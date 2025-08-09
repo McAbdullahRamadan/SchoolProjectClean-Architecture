@@ -46,13 +46,14 @@ namespace Core.Besec
                 Meta = meta,
             };
         }
-        public Response<T> Unauthorzed<T>()
+        public Response<T> Unauthorized<T>(string Message = null)
         {
             return new Response<T>()
             {
                 StatusCode = System.Net.HttpStatusCode.Unauthorized,
                 Succeeded = true,
-                Message = "UnAuthorized",
+
+                Message = Message == null ? _Localizer[KeySharedResource.Unauthorized] : Message,
             };
         }
         public Response<T> UnprocessableEntity<T>(string message = null)

@@ -24,6 +24,8 @@ namespace Infrastructure.DataContext
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
         public DbSet<Subject> subjects { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
