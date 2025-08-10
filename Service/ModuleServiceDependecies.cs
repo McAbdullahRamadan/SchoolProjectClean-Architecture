@@ -13,6 +13,8 @@ namespace Service
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IAuthorizService, AuthorizService>();
+
             services.AddSingleton<ConcurrentDictionary<string, RefreshToken>>();
 
 

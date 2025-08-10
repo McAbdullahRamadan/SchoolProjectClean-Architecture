@@ -50,16 +50,19 @@ namespace Core.Features.UserRegistration.Command.Handle
             //UserName Is Exist
             if (UserByuserName != null) return BadRequst<string>(_Localizer[KeySharedResource.UserNameIsExist]);
             //Mapping
-            var UserMapp = _mapper.Map<UserIdentity>(request);
+            var IdentityUser = _mapper.Map<UserIdentity>(request);
             //Create User
-            var CrateResult = await _userManager.CreateAsync(UserMapp, request.Password);
+            var CrateResult = await _userManager.CreateAsync(IdentityUser, request.Password);
 
             //Failed
             if (!CrateResult.Succeeded)
-            {
+
                 return BadRequst<string>(CrateResult.Errors.FirstOrDefault().Description);
 
-            }
+            await _userManager.AddToRoleAsync(IdentityUser, "User");
+
+
+
             //return
             return Created("");
         }

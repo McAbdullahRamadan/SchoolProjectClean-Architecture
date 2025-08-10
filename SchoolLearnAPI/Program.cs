@@ -1,6 +1,9 @@
 using Core;
+using Data.Entites.Identity;
 using Infrastructure;
 using Infrastructure.DataContext;
+using Infrastructure.Seeder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -109,6 +112,13 @@ builder.Services.AddCors(option =>
 
 
 var app = builder.Build();
+using (var scop = app.Services.CreateScope())
+{
+    var userManager = scop.ServiceProvider.GetRequiredService<UserManager<UserIdentity>>();
+    var roleManager = scop.ServiceProvider.GetRequiredService<RoleManager<RoleSys>>();
+    await RoleSeeder.SeedAsync(roleManager);
+    await UserSeeder.SeedAsync(userManager);
+}
 
 
 // Configure the HTTP request pipeline.

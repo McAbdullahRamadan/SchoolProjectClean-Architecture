@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Infrastructure.DataContext
 {
-    public class ApplicationDbContext : IdentityDbContext<UserIdentity, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+    public class ApplicationDbContext : IdentityDbContext<UserIdentity, RoleSys, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public ApplicationDbContext()
         {

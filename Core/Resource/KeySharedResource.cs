@@ -30,6 +30,9 @@
         public const string RefreshTokenisNotFound = "RefreshTokenisNotFound";
         public const string RefreshTokenisExpired = "RefreshTokenisExpired";
         public const string TokenIsExpired = "TokenIsExpired";
+        public const string AddFailed = "AddFailed";
+
+
 
 
 

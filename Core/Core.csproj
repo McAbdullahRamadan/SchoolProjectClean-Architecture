@@ -16,7 +16,6 @@
     <Folder Include="Features\Authentication\Command\Result\" />
     <Folder Include="Features\Authentication\Queries\Result\" />
     <Folder Include="Features\Authentication\Queries\Validation\" />
-    <Folder Include="Features\Authorization\Command\Handle\" />
     <Folder Include="Features\Authorization\Queries\Handle\" />
     <Folder Include="Features\Authorization\Queries\Models\" />
     <Folder Include="Features\Authorization\Queries\Validators\" />

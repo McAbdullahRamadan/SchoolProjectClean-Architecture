@@ -46,6 +46,13 @@
 
 
         }
+        public static class AuthorizeRoute
+        {
+            public const string Perfix = Rule + "AuthorizeRole";
+            public const string Create = Perfix + "/Role/Create";
+
+
+        }
 
     }
 }
