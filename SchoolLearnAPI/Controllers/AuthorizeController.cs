@@ -10,7 +10,7 @@ namespace SchoolLearnAPI.Controllers
     [ApiController]
     public class AuthorizeController : AppControllerBase
     {
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost(Router.AuthorizeRoute.Create)]
         public async Task<IActionResult> Create([FromForm] AddRoleCommand Command)
         {

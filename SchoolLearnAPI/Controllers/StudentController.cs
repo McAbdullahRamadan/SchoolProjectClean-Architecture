@@ -13,7 +13,7 @@ namespace SchoolLearnAPI.Controllers
     public class StudentController : AppControllerBase
     {
 
-        [Authorize]
+
         [HttpGet(Router.StudentRouter.list)]
         public async Task<IActionResult> GetAllStudent()
         {

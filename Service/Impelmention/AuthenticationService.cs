@@ -40,7 +40,7 @@ namespace Service.Impelmention
 
             //  var JwtToken = GenerateJWTToken(user);
 
-            var (JwtToken, AccessToken) = GenerateJWTToken(user);
+            var (JwtToken, AccessToken) = await GenerateJWTToken(user);
             var refreshtoken = GetRefreshToken(user.UserName);
             var UserRefreshToken = new UserRefreshToken
             {
@@ -62,9 +62,10 @@ namespace Service.Impelmention
             return response;
 
         }
-        private (JwtSecurityToken, string) GenerateJWTToken(UserIdentity user)
+        private async Task<(JwtSecurityToken, string)> GenerateJWTToken(UserIdentity user)
         {
-            var claims = GetClaims(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var claims = GetClaims(user, roles.ToList());
             var JwtToken = new JwtSecurityToken(
              _jwtSettings.Issuer,
              _jwtSettings.audience,
@@ -94,18 +95,20 @@ namespace Service.Impelmention
             reandomNumberGenerate.GetBytes(reandomNumber);
             return Convert.ToBase64String(reandomNumber);
         }
-        public List<Claim> GetClaims(UserIdentity user)
+        public List<Claim> GetClaims(UserIdentity user, List<string> roles)
         {
             var claims = new List<Claim>()
             {
-                new Claim(nameof(UserCliamModels.UserName),user.UserName),
-                new Claim(nameof(UserCliamModels.Email),user.Email),
-                new Claim(nameof(UserCliamModels.PhoneNumber),user.PhoneNumber),
-                new Claim(nameof(UserCliamModels.id),user.Id.ToString()),
-
-
-
+                 new Claim(ClaimTypes.Name,user.UserName),
+                 new Claim(ClaimTypes.NameIdentifier,user.UserName),
+                 new Claim(ClaimTypes.Email,user.Email),
+                 new Claim(nameof(UserCliamModels.PhoneNumber), user.PhoneNumber),
+                 new Claim(nameof(UserCliamModels.id), user.Id.ToString()),
             };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             return claims;
 
         }
@@ -117,7 +120,7 @@ namespace Service.Impelmention
 
 
             //Generate RefreshToken
-            var (JwtSecurityToken, NewToken) = GenerateJWTToken(user);
+            var (JwtSecurityToken, NewToken) = await GenerateJWTToken(user);
 
             var response = new JwtAuthResult();
             response.AccessToken = NewToken;
