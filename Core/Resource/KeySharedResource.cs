@@ -31,6 +31,15 @@
         public const string RefreshTokenisExpired = "RefreshTokenisExpired";
         public const string TokenIsExpired = "TokenIsExpired";
         public const string AddFailed = "AddFailed";
+        public const string editRoleSuccess = "editRoleSuccess";
+        public const string RoleNotExist = "RoleNotExist";
+        public const string RoleIsUsed = "RoleIsUsed";
+
+
+
+
+
+
 
 
 

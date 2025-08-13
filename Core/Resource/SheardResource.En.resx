@@ -138,6 +138,9 @@
   <data name="DeletedFailed" xml:space="preserve">
     <value>Delete Operation Failed</value>
   </data>
+  <data name="editRoleSuccess" xml:space="preserve">
+    <value>Edit  Role Success</value>
+  </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>Email Is Exist</value>
   </data>
@@ -173,6 +176,12 @@
   </data>
   <data name="Requierd" xml:space="preserve">
     <value>The Field is Requierd</value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>Role Is Used</value>
+  </data>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>Role Not Exist</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Successfully</value>

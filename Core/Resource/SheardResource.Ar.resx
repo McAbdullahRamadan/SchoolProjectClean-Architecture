@@ -141,6 +141,9 @@
   <data name="DepartmentIsNotExist" xml:space="preserve">
     <value>رقم القسم غير موجود</value>
   </data>
+  <data name="editRoleSuccess" xml:space="preserve">
+    <value>تم التعديل بنجاح</value>
+  </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>البريد الالكتروني موجود بالفعل</value>
   </data>
@@ -179,6 +182,12 @@
   </data>
   <data name="Requierd" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>هذه الصلاحية لديها مستخدمين</value>
+  </data>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>هذة الصلاحية غير متاحة</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العملية بنجاح</value>

@@ -2,21 +2,20 @@
 using Core.Resource;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Service.Abstruct;
 
 namespace Core.Features.Authorization.Command.Validators
 {
-    public class AddValidatorRole : AbstractValidator<AddRoleCommand>
+    public class EditRoleValidator : AbstractValidator<EditRoleCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SheardResource> _localizer;
-        private readonly IAuthorizService _authorizService;
+
         #endregion
         #region Constructors
-        public AddValidatorRole(IStringLocalizer<SheardResource> localizer, IAuthorizService authorizService)
+        public EditRoleValidator(IStringLocalizer<SheardResource> localizer)
         {
             _localizer = localizer;
-            _authorizService = authorizService;
+
             ApplayValidationRule();
             ApplyCustomeValidatioonrules();
         }
@@ -24,7 +23,10 @@ namespace Core.Features.Authorization.Command.Validators
         #region Actions
         public void ApplayValidationRule()
         {
-            RuleFor(x => x.RoleName)
+            RuleFor(x => x.Id)
+              .NotEmpty().WithMessage(_localizer[KeySharedResource.NotEmtpy])
+              .NotNull().WithMessage(_localizer[KeySharedResource.NotNull]);
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage(_localizer[KeySharedResource.NotEmtpy])
                 .NotNull().WithMessage(_localizer[KeySharedResource.NotNull]);
 
@@ -32,9 +34,9 @@ namespace Core.Features.Authorization.Command.Validators
         }
         public void ApplyCustomeValidatioonrules()
         {
-            RuleFor(x => x.RoleName)
-                  .MustAsync(async (key, CancellationToken) => !await _authorizService.IsRoleExistByName(key))
-                  .WithMessage(_localizer[KeySharedResource.IsExist]);
+            //RuleFor(x => x.RoleName)
+            //      .MustAsync(async (key, CancellationToken) => !await _authorizService.IsRoleExist(key))
+            //      .WithMessage(_localizer[KeySharedResource.IsExist]);
         }
         #endregion
 
