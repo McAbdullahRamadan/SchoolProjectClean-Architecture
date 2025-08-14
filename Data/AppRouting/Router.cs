@@ -52,6 +52,13 @@
             public const string Create = Perfix + "/Role/Create";
             public const string Edit = Perfix + "/Role/Edit";
             public const string Delete = Perfix + "/Role/{id}";
+            public const string ListRole = Perfix + "/Role-list";
+            public const string RoleById = Perfix + "/Role-By/{id}";
+
+
+
+
+
 
 
 

@@ -1,8 +1,10 @@
 ﻿using Core.Features.Authorization.Command.Models;
+using Core.Features.Authorization.Queries.Models;
 using Data.AppRouting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolLearnAPI.Base;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace SchoolLearnAPI.Controllers
 {
@@ -28,6 +30,22 @@ namespace SchoolLearnAPI.Controllers
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var response = await Mediator.Send(new DeleteRoleCommand(id));
+            return NewResult(response);
+        }
+        [Authorize(Roles = "Admin")]
+
+        [HttpGet(Router.AuthorizeRoute.ListRole)]
+        public async Task<IActionResult> GetRoleList()
+        {
+            var response = await Mediator.Send(new GetRolesListQuery());
+            return NewResult(response);
+        }
+        [Authorize(Roles = "Admin")]
+        [SwaggerOperation(summary: "هذه الصلاحية عن طريق ال Id", OperationId = "RoleById")]
+        [HttpGet(Router.AuthorizeRoute.RoleById)]
+        public async Task<IActionResult> GetRoleById([FromRoute] int id)
+        {
+            var response = await Mediator.Send(new GetRoleByIdQuery() { Id = id });
             return NewResult(response);
         }
     }

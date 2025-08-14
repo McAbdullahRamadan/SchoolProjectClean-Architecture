@@ -1,6 +1,7 @@
 ﻿using Data.DTORequset;
 using Data.Entites.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Service.Abstruct;
 
 namespace Service.Impelmention
@@ -74,6 +75,16 @@ namespace Service.Impelmention
             var errors = string.Join("", result.Errors);
             return errors;
 
+        }
+
+        public async Task<List<RoleSys>> GetRoleAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+
+        public async Task<RoleSys> GetRoleByIdAsync(int id)
+        {
+            return await _roleManager.FindByIdAsync(id.ToString());
         }
 
         #endregion
