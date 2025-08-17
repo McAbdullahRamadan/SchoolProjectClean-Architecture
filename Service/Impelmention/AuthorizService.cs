@@ -1,8 +1,12 @@
 ﻿using Data.DTORequset;
 using Data.Entites.Identity;
+using Data.Helpers;
+using Data.Helpers.Results;
+using Infrastructure.DataContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Service.Abstruct;
+using static Data.Helpers.Results.ManageUserClaimsResult;
 
 namespace Service.Impelmention
 {
@@ -11,13 +15,15 @@ namespace Service.Impelmention
         #region Fields
         private readonly RoleManager<RoleSys> _roleManager;
         private readonly UserManager<UserIdentity> _UserManager;
+        private readonly ApplicationDbContext _dbContext;
 
         #endregion
         #region Constructors
-        public AuthorizService(RoleManager<RoleSys> roleManager, UserManager<UserIdentity> UserManager)
+        public AuthorizService(RoleManager<RoleSys> roleManager, UserManager<UserIdentity> UserManager, ApplicationDbContext dbContext)
         {
             _roleManager = roleManager;
             _UserManager = UserManager;
+            _dbContext = dbContext;
 
 
         }
@@ -87,6 +93,110 @@ namespace Service.Impelmention
             return await _roleManager.FindByIdAsync(id.ToString());
         }
 
+        public async Task<ManageUserRoleResult> GetManageRoleUser(UserIdentity User)
+        {
+            var response = new ManageUserRoleResult();
+            var rolelist = new List<UserRoles>();
+            //userroles
+            var userRole = await _UserManager.GetRolesAsync(User);
+            //Roles
+            var roles = await _roleManager.Roles.ToListAsync();
+            response.UserId = User.Id;
+            foreach (var role in roles)
+            {
+                var userrole = new UserRoles();
+                userrole.Id = role.Id;
+                userrole.Name = role.Name;
+                if (userRole.Contains(role.Name))
+                {
+                    userrole.HasRole = true;
+                }
+                else
+                {
+                    userrole.HasRole = false;
+                }
+                rolelist.Add(userrole);
+            }
+            response.UserRoles = rolelist;
+            return response;
+
+
+
+
+        }
+
+        public async Task<string> UpdateUserRole(UpdateUserRoleRequest request)
+        {
+            //get BeginTransact
+            var Transact = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+
+
+                //get user 
+                var user = await _UserManager.FindByIdAsync(request.UserId.ToString());
+                if (user == null)
+                {
+                    return "UserIsNull";
+                }
+                //Get Role 
+                var UserRole = await _UserManager.GetRolesAsync(user);
+                var RemoveRole = await _UserManager.RemoveFromRolesAsync(user, UserRole);
+                if (!RemoveRole.Succeeded)
+
+                    return "FialedToRemoveRoles";
+
+                //Has Role = True Or False
+                var SelectedRoles = request.UserRoles.Where(x => x.HasRole == true).Select(x => x.Name);
+                var AddRolesresult = await _UserManager.AddToRolesAsync(user, SelectedRoles);
+                if (!AddRolesresult.Succeeded)
+
+                    return "FialedToAddNewRoles";
+                await Transact.CommitAsync();
+
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await Transact.RollbackAsync();
+                return "FialedToAddUserRole";
+
+            }
+
+
+
+        }
+        public async Task<ManageUserClaimsResult> GetManageUserClaimsData(UserIdentity user)
+        {
+            var response = new ManageUserClaimsResult();
+            var userClaimsList = new List<UserClaims>();
+            response.UserId = user.Id;
+
+            //Get User Claims
+            var userclaims = await _UserManager.GetClaimsAsync(user);  //edit
+                                                                       //create edit get print  
+            foreach (var claim in ClaimsStore.claims)
+            {
+                var userClaim = new UserClaims();
+                userClaim.Type = claim.Type;
+                if (userclaims.Any(x => x.Type == claim.Type))
+                {
+                    userClaim.Value = true;
+                }
+                else
+                {
+                    userClaim.Value = false;
+                }
+                userClaimsList.Add(userClaim);
+
+
+
+            }
+            response.Userclaims = userClaimsList;
+            return response;
+
+
+        }
         #endregion
 
     }

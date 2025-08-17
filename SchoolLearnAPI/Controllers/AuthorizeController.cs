@@ -41,11 +41,32 @@ namespace SchoolLearnAPI.Controllers
             return NewResult(response);
         }
         [Authorize(Roles = "Admin")]
-        [SwaggerOperation(summary: "هذه الصلاحية عن طريق ال Id", OperationId = "RoleById")]
+
         [HttpGet(Router.AuthorizeRoute.RoleById)]
         public async Task<IActionResult> GetRoleById([FromRoute] int id)
         {
             var response = await Mediator.Send(new GetRoleByIdQuery() { Id = id });
+            return NewResult(response);
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet(Router.AuthorizeRoute.ManageUserRole)]
+        public async Task<IActionResult> ManageUserRole([FromRoute] int userId)
+        {
+            var response = await Mediator.Send(new ManageUserRoleQuery() { UserId = userId });
+            return NewResult(response);
+        }
+        [SwaggerOperation(summary: "تعديل صلاحيات المستخدمين", OperationId = "ManageUserRoles")]
+        [HttpPut(Router.AuthorizeRoute.UpdateUserRoles)]
+        public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateRoleUserCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet(Router.AuthorizeRoute.ManageUserClaims)]
+        public async Task<IActionResult> ManageUserClaims([FromRoute] int userId)
+        {
+            var response = await Mediator.Send(new ManageUserClaimsQuery() { UserId = userId });
             return NewResult(response);
         }
     }

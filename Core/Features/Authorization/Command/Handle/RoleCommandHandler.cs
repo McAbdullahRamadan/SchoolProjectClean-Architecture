@@ -10,7 +10,9 @@ namespace Core.Features.Authorization.Command.Handle
     public class RoleCommandHandler : ResponseHadlar,
         IRequestHandler<AddRoleCommand, Response<string>>,
         IRequestHandler<EditRoleCommand, Response<string>>,
-        IRequestHandler<DeleteRoleCommand, Response<string>>
+        IRequestHandler<DeleteRoleCommand, Response<string>>,
+        IRequestHandler<UpdateRoleUserCommand, Response<string>>
+
 
 
     {
@@ -59,6 +61,20 @@ namespace Core.Features.Authorization.Command.Handle
                 return Success<string>(_localizer[KeySharedResource.Deleted]);
             else
                 return BadRequst<string>(result);
+        }
+
+        public async Task<Response<string>> Handle(UpdateRoleUserCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authorizService.UpdateUserRole(request);
+            switch (result)
+            {
+                case "UserIsNull": return NotFound<string>(_localizer[KeySharedResource.userIsNotFound]);
+                case "FialedToRemoveRoles": return BadRequst<string>(_localizer[KeySharedResource.FailedToRemoveRoles]);
+                case "FialedToAddNewRoles": return BadRequst<string>(_localizer[KeySharedResource.FialedToAddNewRoles]);
+                //case "Success": return Success<string>(_localizer[KeySharedResource.Success]);
+                case "FialedToAddUserRole": return BadRequst<string>(_localizer[KeySharedResource.FialedToAddUserRole]);
+            }
+            return Success<string>(_localizer[KeySharedResource.Success]);
         }
         #endregion
 

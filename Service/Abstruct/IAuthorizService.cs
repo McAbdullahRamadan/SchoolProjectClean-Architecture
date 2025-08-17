@@ -1,5 +1,6 @@
 ﻿using Data.DTORequset;
 using Data.Entites.Identity;
+using Data.Helpers.Results;
 
 namespace Service.Abstruct
 {
@@ -13,6 +14,11 @@ namespace Service.Abstruct
         public Task<string> DeleteRoleAsync(int RoleId);
         public Task<List<RoleSys>> GetRoleAsync();
         public Task<RoleSys> GetRoleByIdAsync(int id);
+        public Task<ManageUserRoleResult> GetManageRoleUser(UserIdentity User);
+        public Task<string> UpdateUserRole(UpdateUserRoleRequest request);
+        public Task<ManageUserClaimsResult> GetManageUserClaimsData(UserIdentity user);
+
+
 
 
 

@@ -48,12 +48,28 @@
         }
         public static class AuthorizeRoute
         {
+            /// <summary>
+            //Role Url
+            /// </summary>
             public const string Perfix = Rule + "AuthorizeRole";
-            public const string Create = Perfix + "/Role/Create";
-            public const string Edit = Perfix + "/Role/Edit";
-            public const string Delete = Perfix + "/Role/{id}";
-            public const string ListRole = Perfix + "/Role-list";
-            public const string RoleById = Perfix + "/Role-By/{id}";
+            public const string Roles = Perfix + "/Role";
+            public const string Create = Roles + "/Create";
+            public const string Edit = Roles + "/Edit";
+            public const string Delete = Roles + "/Delete/{id}";
+            public const string ListRole = Roles + "/Role-list";
+            public const string RoleById = Roles + "/Role-By/{id}";
+            public const string ManageUserRole = Roles + "/Manage-User-Role/{userId}";
+            public const string UpdateUserRoles = Roles + "/Update-User-Role";
+
+            //Claims Url
+            public const string Claims = Perfix + "/Claims";
+            public const string ManageUserClaims = Claims + "/Update-User-Role/{userId}";
+
+
+
+
+
+
 
 
 

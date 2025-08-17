@@ -34,50 +34,10 @@
         public const string editRoleSuccess = "editRoleSuccess";
         public const string RoleNotExist = "RoleNotExist";
         public const string RoleIsUsed = "RoleIsUsed";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public const string userIsNotFound = "userIsNotFound";
+        public const string FailedToRemoveRoles = "FailedToRemoveRoles";
+        public const string FialedToAddNewRoles = "FialedToAddNewRoles";
+        public const string FialedToAddUserRole = "FialedToAddUserRole";
 
     }
 }
