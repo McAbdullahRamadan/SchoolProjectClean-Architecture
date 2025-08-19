@@ -99,7 +99,7 @@ namespace Service.Impelmention
             var response = new ManageUserRoleResult();
             var rolelist = new List<UserRoles>();
             //userroles
-            var userRole = await _UserManager.GetRolesAsync(User);
+            //var userRole = await _UserManager.GetRolesAsync(User);
             //Roles
             var roles = await _roleManager.Roles.ToListAsync();
             response.UserId = User.Id;
@@ -108,7 +108,7 @@ namespace Service.Impelmention
                 var userrole = new UserRoles();
                 userrole.Id = role.Id;
                 userrole.Name = role.Name;
-                if (userRole.Contains(role.Name))
+                if (await _UserManager.IsInRoleAsync(User, role.Name))
                 {
                     userrole.HasRole = true;
                 }

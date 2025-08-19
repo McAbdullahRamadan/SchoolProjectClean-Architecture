@@ -13,7 +13,7 @@ namespace SchoolLearnAPI.Controllers
     public class StudentController : AppControllerBase
     {
 
-
+        [Authorize(Policy = "CreateStudent")]
         [HttpGet(Router.StudentRouter.list)]
         public async Task<IActionResult> GetAllStudent()
         {

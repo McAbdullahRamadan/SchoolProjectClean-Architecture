@@ -62,10 +62,10 @@ namespace Service.Impelmention
             return response;
 
         }
-        private async Task<(JwtSecurityToken, string)> GenerateJWTToken(UserIdentity user)
+        public async Task<(JwtSecurityToken, string)> GenerateJWTToken(UserIdentity user)
         {
-            var roles = await _userManager.GetRolesAsync(user);
-            var claims = GetClaims(user, roles.ToList());
+
+            var claims = await GetClaims(user);
             var JwtToken = new JwtSecurityToken(
              _jwtSettings.Issuer,
              _jwtSettings.audience,
@@ -95,8 +95,11 @@ namespace Service.Impelmention
             reandomNumberGenerate.GetBytes(reandomNumber);
             return Convert.ToBase64String(reandomNumber);
         }
-        public List<Claim> GetClaims(UserIdentity user, List<string> roles)
+        public async Task<List<Claim>> GetClaims(UserIdentity user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+
+
             var claims = new List<Claim>()
             {
                  new Claim(ClaimTypes.Name,user.UserName),
@@ -109,6 +112,9 @@ namespace Service.Impelmention
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
+            var Userclaims = await _userManager.GetClaimsAsync(user);
+            claims.AddRange(Userclaims);
+
             return claims;
 
         }
