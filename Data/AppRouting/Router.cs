@@ -63,7 +63,10 @@
 
             //Claims Url
             public const string Claims = Perfix + "/Claims";
-            public const string ManageUserClaims = Claims + "/Update-User-Role/{userId}";
+            public const string ManageUserClaims = Claims + "/Update-User-Claims/{userId}";
+            public const string UpdateUserClaims = Claims + "/Update-User-Claims";
+
+
 
 
 

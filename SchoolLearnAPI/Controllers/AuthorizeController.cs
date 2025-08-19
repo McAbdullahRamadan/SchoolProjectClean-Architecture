@@ -69,5 +69,12 @@ namespace SchoolLearnAPI.Controllers
             var response = await Mediator.Send(new ManageUserClaimsQuery() { UserId = userId });
             return NewResult(response);
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPut(Router.AuthorizeRoute.UpdateUserClaims)]
+        public async Task<IActionResult> UpdateUserClaims([FromBody] UpdateUserClaimsCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
     }
 }

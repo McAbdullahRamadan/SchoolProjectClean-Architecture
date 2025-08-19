@@ -18,6 +18,9 @@ namespace Service.Abstruct
         public Task<string> UpdateUserRole(UpdateUserRoleRequest request);
         public Task<ManageUserClaimsResult> GetManageUserClaimsData(UserIdentity user);
 
+        public Task<string> UpdateUserClaims(UpdateUserClaimsRequest request);
+
+
 
 
 

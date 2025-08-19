@@ -147,11 +147,20 @@
   <data name="EmailIsExist" xml:space="preserve">
     <value>البريد الالكتروني موجود بالفعل</value>
   </data>
+  <data name="FailedToAddNewClaims" xml:space="preserve">
+    <value>فشل في اضافة المطالبات</value>
+  </data>
   <data name="FailedToAddUser" xml:space="preserve">
     <value>حدث خطا أثناء أضافة المستخدم</value>
   </data>
+  <data name="FailedToRemoveOldClaims" xml:space="preserve">
+    <value>فشل في ازالة المطالبات</value>
+  </data>
   <data name="FailedToRemoveRoles" xml:space="preserve">
     <value>فشل في حذف الصلاحية</value>
+  </data>
+  <data name="FailedToUpdateClaims" xml:space="preserve">
+    <value>فشل في تحديث المطالبات</value>
   </data>
   <data name="FialedToAddNewRoles" xml:space="preserve">
     <value>تم رفض اضافة صلاحية جديدة</value>

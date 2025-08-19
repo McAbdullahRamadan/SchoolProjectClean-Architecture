@@ -6,6 +6,7 @@ using Infrastructure.DataContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Service.Abstruct;
+using System.Security.Claims;
 using static Data.Helpers.Results.ManageUserClaimsResult;
 
 namespace Service.Impelmention
@@ -195,6 +196,36 @@ namespace Service.Impelmention
             response.Userclaims = userClaimsList;
             return response;
 
+
+        }
+
+        public async Task<string> UpdateUserClaims(UpdateUserClaimsRequest request)
+        {
+            var Transact = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _UserManager.FindByIdAsync(request.UserId.ToString());
+                if (user == null)
+                {
+                    return "UserIsNull";
+                }
+                var userclaims = await _UserManager.GetClaimsAsync(user);
+                var removeclaimsresult = await _UserManager.RemoveClaimsAsync(user, userclaims);
+                if (!removeclaimsresult.Succeeded)
+                    return "FailedToRemoveOldClaims";
+                var Claims = request.Userclaims.Where(x => x.Value == true).Select(x => new Claim(x.Type, x.Value.ToString()));
+                var AddUserClaimsResult = await _UserManager.AddClaimsAsync(user, Claims);
+                if (!AddUserClaimsResult.Succeeded)
+                    return "FailedToAddNewClaims";
+                await Transact.CommitAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await Transact.RollbackAsync();
+                return "FailedToUpdateClaims";
+
+            }
 
         }
         #endregion
