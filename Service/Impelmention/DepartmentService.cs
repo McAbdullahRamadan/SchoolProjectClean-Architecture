@@ -7,6 +7,7 @@ namespace Service.Impelmention
 {
     public class DepartmentService : IDepartmentService
     {
+        //Department Service
         #region Fields
         public readonly IDepartmentRepository _departmentRepository;
         #endregion
@@ -24,11 +25,15 @@ namespace Service.Impelmention
         {
             var resultStudent = await _departmentRepository.GetTableNoTracking().Where(x => x.DID.Equals(id))
                                                          .Include(x => x.DepartmentSubjects).ThenInclude(x => x.Subjects)
-
                                                          .Include(x => x.Instructors)
                                                          .Include(x => x.Instructor).FirstOrDefaultAsync();
             return resultStudent;
 
+        }
+
+        public async Task<bool> IsDEpartmentIdExist(int Department)
+        {
+            return await _departmentRepository.GetTableNoTracking().AnyAsync(x => x.DID.Equals(Department));
         }
         #endregion
     }

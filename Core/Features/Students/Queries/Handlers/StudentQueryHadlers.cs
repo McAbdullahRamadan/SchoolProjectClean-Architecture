@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 
 namespace Core.Features.Students.Queries.Handlers
 {
-    public class StudentHadlers : ResponseHadlar,
+    public class StudentQueryHadlers : ResponseHadlar,
         IRequestHandler<GetListStudentQueries, Response<List<GetSudentListResult>>>,
         IRequestHandler<GetStudentByIdQueries, Response<GetSingleStudentResponse>>,
         IRequestHandler<GetStudentPaginatedListQuery, PaginatedResult<GetStudentpaginatedListResponse>>
@@ -30,7 +30,7 @@ namespace Core.Features.Students.Queries.Handlers
 
         #endregion
         #region Constructor
-        public StudentHadlers(IStudentService studentService, IMapper mapper, IStringLocalizer<SheardResource> Localizer) : base(Localizer)
+        public StudentQueryHadlers(IStudentService studentService, IMapper mapper, IStringLocalizer<SheardResource> Localizer) : base(Localizer)
         {
             _studentService = studentService;
             _mapper = mapper;
