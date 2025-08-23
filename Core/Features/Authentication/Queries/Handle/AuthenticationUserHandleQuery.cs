@@ -10,7 +10,10 @@ namespace Core.Features.Authentication.Queries.Handle
     public class AuthenticationUserHandleQuery : ResponseHadlar,
 
         IRequestHandler<AuthorizeUserQuery, Response<string>>,
-        IRequestHandler<ConfirmEmailQuery, Response<string>>
+        IRequestHandler<ConfirmEmailQuery, Response<string>>,
+        IRequestHandler<ConfirmResetPasswordQuery, Response<string>>
+
+
 
 
     {
@@ -55,6 +58,21 @@ namespace Core.Features.Authentication.Queries.Handle
             if (confirmEmail == "ErrorWhenConfirmEmail")
                 return BadRequst<string>(_Localizer[KeySharedResource.ErrorWhenConfirmEmail]);
             return Success<string>(_Localizer[KeySharedResource.ConfirmEmailIsDone]);
+        }
+
+        public async Task<Response<string>> Handle(ConfirmResetPasswordQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ResetPasswordCode(request.Email, request.Code);
+            switch (result)
+
+            {
+                case "UserNotFound": return BadRequst<string>(_Localizer[KeySharedResource.userIsNotFound]);
+
+                case "Falied": return BadRequst<string>(_Localizer[KeySharedResource.InvalidCode]);
+                case "Success": return Success<string>("");
+                default: return BadRequst<string>(_Localizer[KeySharedResource.InvalidCode]);
+
+            }
         }
         #endregion
     }

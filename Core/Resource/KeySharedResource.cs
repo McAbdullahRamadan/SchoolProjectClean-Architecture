@@ -52,6 +52,9 @@
         public const string ErrorWhenConfirmEmail = "ErrorWhenConfirmEmail";
         public const string ConfirmEmailIsDone = "ConfirmEmailIsDone";
         public const string TryAgainInAnotherTime = "TryAgainInAnotherTime";
+        public const string InvalidCode = "InvalidCode";
+
+
 
 
 

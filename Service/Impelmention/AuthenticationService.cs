@@ -1,5 +1,7 @@
 ﻿using Data.Entites.Identity;
 using Data.Helpers;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
 using Infrastructure.AbstractRepository;
 using Infrastructure.DataContext;
 using Microsoft.AspNetCore.Identity;
@@ -23,6 +25,8 @@ namespace Service.Impelmention
         private readonly UserManager<UserIdentity> _userManager;
         private readonly IEmailsService _emailsService;
         private readonly ApplicationDbContext _dbContext;
+        private readonly IEncryptionProvider _encryptionProvider;
+
 
 
 
@@ -39,6 +43,8 @@ namespace Service.Impelmention
             _userManager = userManager;
             _emailsService = emailsService;
             _dbContext = dbContext;
+            _encryptionProvider = new GenerateEncryptionProvider("60e1abb8eb4a4af8946945e7c431697b");
+
         }
         #endregion
         #region Handle Function
@@ -268,6 +274,21 @@ namespace Service.Impelmention
                 await trans.RollbackAsync();
                 return "Failed";
             }
+        }
+
+        public async Task<string> ResetPasswordCode(string email, string code)
+        {
+            //Get User
+            var user = await _userManager.FindByEmailAsync(email);
+            //User Not Exist => not found
+            if (user == null)
+                return "UserNotFound";
+            //Decrept code from database User Code
+            var usercode = user.Code;
+            //UserCode Equal  Code
+
+            if (usercode == code) return "Success";
+            return "Falied";
         }
 
         #endregion

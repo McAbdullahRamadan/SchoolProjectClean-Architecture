@@ -43,6 +43,9 @@
             public const string ValidateToken = Perfix + "/ValidateToken";
             public const string ConfirmEmail = "/Api/Authentication/ConfirmEmail";
             public const string SendResetPassword = Perfix + "/SendResetPassword";
+            public const string ConfirmResetPasswordQuery = Perfix + "/ConfirmResetPasswordQuery";
+
+
 
 
 

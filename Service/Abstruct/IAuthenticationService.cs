@@ -13,6 +13,8 @@ namespace Service.Abstruct
         public Task<string> ValidateToken(string accessToken);
         public Task<string> ConfirmEmail(int? userId, string? code);
         public Task<string> SendResetPasswordCode(string Email);
+        public Task<string> ResetPasswordCode(string code, string email);
+
 
 
 

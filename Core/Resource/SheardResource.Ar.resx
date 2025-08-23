@@ -180,6 +180,9 @@
   <data name="FialedToAddUserRole" xml:space="preserve">
     <value>فشل في اضافة مستخدم الصلاحية</value>
   </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>هذا الكود غير صحيح</value>
+  </data>
   <data name="IsExist" xml:space="preserve">
     <value>موجود بالفعل</value>
   </data>
