@@ -4,9 +4,11 @@ using Core.Features.UserRegistration.Command.Models;
 using Core.Resource;
 using Data.Entites.Identity;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Service.Abstruct;
 
 namespace Core.Features.UserRegistration.Command.Handle
 {
@@ -22,17 +24,23 @@ namespace Core.Features.UserRegistration.Command.Handle
         #region Fields
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SheardResource> _Localizer;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<UserIdentity> _userManager;
+        private readonly IEmailsService _emailsServic;
+        private readonly IApplicationUserService _applicationUser;
 
 
         #endregion
         #region Constructors
         public UserCommandHandle(IStringLocalizer<SheardResource> stringLocalizer, IMapper mapper
-            , UserManager<UserIdentity> userManage) : base(stringLocalizer)
+            , UserManager<UserIdentity> userManage, IApplicationUserService applicationUser, IHttpContextAccessor httpContextAccessor, IEmailsService emailsServic) : base(stringLocalizer)
         {
             _Localizer = stringLocalizer;
             _mapper = mapper;
             _userManager = userManage;
+            _httpContextAccessor = httpContextAccessor;
+            _emailsServic = emailsServic;
+            _applicationUser = applicationUser;
 
         }
 
@@ -41,30 +49,36 @@ namespace Core.Features.UserRegistration.Command.Handle
 
         public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
-            //if Email Is Exist
-            var User = await _userManager.FindByEmailAsync(request.Email);
-            // Email Exist
-            if (User != null) return BadRequst<string>(_Localizer[KeySharedResource.EmailIsExist]);
-            //if UserName Is Exist
-            var UserByuserName = await _userManager.FindByNameAsync(request.FullName);
-            //UserName Is Exist
-            if (UserByuserName != null) return BadRequst<string>(_Localizer[KeySharedResource.UserNameIsExist]);
+            ////if Email Is Exist
+            //var User = await _userManager.FindByEmailAsync(request.Email);
+            //// Email Exist
+            //if (User != null) return BadRequst<string>(_Localizer[KeySharedResource.EmailIsExist]);
+            ////if UserName Is Exist
+            //var UserByuserName = await _userManager.FindByNameAsync(request.FullName);
+            ////UserName Is Exist
+            //if (UserByuserName != null) return BadRequst<string>(_Localizer[KeySharedResource.UserNameIsExist]);
+
             //Mapping
             var IdentityUser = _mapper.Map<UserIdentity>(request);
             //Create User
-            var CrateResult = await _userManager.CreateAsync(IdentityUser, request.Password);
-
-            //Failed
-            if (!CrateResult.Succeeded)
-
-                return BadRequst<string>(CrateResult.Errors.FirstOrDefault().Description);
-
-            await _userManager.AddToRoleAsync(IdentityUser, "User");
+            var CrateResult = await _applicationUser.AddUserAsync(IdentityUser, request.Password);
 
 
+            switch (CrateResult)
 
-            //return
-            return Created("");
+            {
+                case "EmailIsExist": return BadRequst<string>(_Localizer[KeySharedResource.EmailIsExist]);
+                case "UserNameIsExist": return BadRequst<string>(_Localizer[KeySharedResource.UserNameIsExist]);
+                case "ErrorInCreateUser": return BadRequst<string>(_Localizer[KeySharedResource.FialedToAddUser]);
+                case "Falied": return BadRequst<string>(_Localizer[KeySharedResource.TryToRegisterAgain]);
+                case "Success": return Success<string>("");
+                default: return BadRequst<string>(CrateResult);
+
+            }
+
+
+
+
         }
 
         public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)

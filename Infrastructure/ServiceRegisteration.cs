@@ -41,10 +41,16 @@ namespace Infrastructure
              }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             //Jwt Authentication
 
+            var EmailSettings = new EmailSettings();
 
             var jwtSettings = new JwtSettings();
             configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
+            configuration.GetSection(nameof(EmailSettings)).Bind(EmailSettings);
+
+
             services.AddSingleton(jwtSettings);
+            services.AddSingleton(EmailSettings);
+
 
             services.AddAuthentication(x =>
             {

@@ -9,7 +9,9 @@ namespace Core.Features.Authentication.Queries.Handle
 {
     public class AuthenticationUserHandleQuery : ResponseHadlar,
 
-        IRequestHandler<AuthorizeUserQuery, Response<string>>
+        IRequestHandler<AuthorizeUserQuery, Response<string>>,
+        IRequestHandler<ConfirmEmailQuery, Response<string>>
+
 
     {
         #region Fields
@@ -45,6 +47,14 @@ namespace Core.Features.Authentication.Queries.Handle
             }
             return Unauthorized<string>(_Localizer[KeySharedResource.TokenIsExpired]);
 
+        }
+
+        public async Task<Response<string>> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
+        {
+            var confirmEmail = await _authenticationService.ConfirmEmail(request.userId, request.code);
+            if (confirmEmail == "ErrorWhenConfirmEmail")
+                return BadRequst<string>(_Localizer[KeySharedResource.ErrorWhenConfirmEmail]);
+            return Success<string>(_Localizer[KeySharedResource.ConfirmEmailIsDone]);
         }
         #endregion
     }

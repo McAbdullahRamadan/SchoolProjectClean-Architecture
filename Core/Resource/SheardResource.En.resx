@@ -129,6 +129,9 @@
   <data name="ChangePassSuccess" xml:space="preserve">
     <value>Change Passًword Successfully</value>
   </data>
+  <data name="ConfirmEmailIsDone" xml:space="preserve">
+    <value>Confirm Email Done</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create Successfully</value>
   </data>
@@ -143,6 +146,12 @@
   </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>Email Is Exist</value>
+  </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>Email Not Confirmed</value>
+  </data>
+  <data name="ErrorWhenConfirmEmail" xml:space="preserve">
+    <value>Error When Confirm Email</value>
   </data>
   <data name="FailedToAddNewClaims" xml:space="preserve">
     <value>Failed To Add New Claims</value>
@@ -161,6 +170,9 @@
   </data>
   <data name="FialedToAddNewRoles" xml:space="preserve">
     <value>Fialed To Add New Roles</value>
+  </data>
+  <data name="FialedToAddUser" xml:space="preserve">
+    <value>Fialed To Add User</value>
   </data>
   <data name="FialedToAddUserRole" xml:space="preserve">
     <value>Failed To Add User Role</value>
@@ -201,6 +213,9 @@
   <data name="RoleNotExist" xml:space="preserve">
     <value>Role Not Exist</value>
   </data>
+  <data name="SendEmailFailed" xml:space="preserve">
+    <value>Send Email Failed</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Successfully</value>
   </data>
@@ -209,6 +224,12 @@
   </data>
   <data name="TokenisNotExpired" xml:space="preserve">
     <value>Token Is Not Expired</value>
+  </data>
+  <data name="TryAgainInAnotherTime" xml:space="preserve">
+    <value>Try Again In Another Time</value>
+  </data>
+  <data name="TryToRegisterAgain" xml:space="preserve">
+    <value>Try To Register Again</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>Unauthorized</value>

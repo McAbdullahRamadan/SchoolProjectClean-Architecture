@@ -7,7 +7,8 @@ using SchoolLearnAPI.Base;
 namespace SchoolLearnAPI.Controllers
 {
 
-    [ApiController]
+
+
     public class AuthenticationController : AppControllerBase
     {
         [HttpPost(Router.Authentication.SignIn)]
@@ -23,10 +24,23 @@ namespace SchoolLearnAPI.Controllers
             return NewResult(response);
         }
         [HttpGet(Router.Authentication.ValidateToken)]
-        public async Task<IActionResult> ValidateToken([FromQuery] AuthorizeUserQuery comand)
+        public async Task<IActionResult> ValidateToken([FromQuery] AuthorizeUserQuery Query)
         {
-            var response = await Mediator.Send(comand);
+            var response = await Mediator.Send(Query);
             return NewResult(response);
         }
+        [HttpGet(Router.Authentication.ConfirmEmail)]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery Query)
+        {
+            var response = await Mediator.Send(Query);
+            return NewResult(response);
+        }
+        [HttpPost(Router.Authentication.SendResetPassword)]
+        public async Task<IActionResult> SendResetPassword([FromQuery] SendResetPasswordCommand Query)
+        {
+            var response = await Mediator.Send(Query);
+            return NewResult(response);
+        }
+
     }
 }

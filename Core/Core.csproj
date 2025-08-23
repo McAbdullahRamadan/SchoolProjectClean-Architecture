@@ -15,9 +15,11 @@
   <ItemGroup>
     <Folder Include="Features\Authentication\Command\Result\" />
     <Folder Include="Features\Authentication\Queries\Result\" />
-    <Folder Include="Features\Authentication\Queries\Validation\" />
     <Folder Include="Features\Authorization\Queries\Validators\" />
     <Folder Include="Features\Department\Command\" />
+    <Folder Include="Features\EmailsSend\Query\Handle\" />
+    <Folder Include="Features\EmailsSend\Query\Models\" />
+    <Folder Include="Features\EmailsSend\Query\Valiadtors\" />
     <Folder Include="Features\Mapping\CommandMapp\" />
     <Folder Include="Features\Mapping\DepartmentMapp\CommandMapping\" />
     <Folder Include="Features\Students\Handels\" />

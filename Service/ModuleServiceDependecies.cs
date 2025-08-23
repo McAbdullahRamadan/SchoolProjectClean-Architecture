@@ -14,6 +14,11 @@ namespace Service
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IAuthorizService, AuthorizService>();
+            services.AddTransient<IEmailsService, EmailsService>();
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
+
+
+
 
             services.AddSingleton<ConcurrentDictionary<string, RefreshToken>>();
 

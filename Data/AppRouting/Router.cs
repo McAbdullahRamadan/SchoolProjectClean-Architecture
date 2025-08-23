@@ -41,11 +41,29 @@
             public const string SignIn = Perfix + "/SignIn";
             public const string RefreshToken = Perfix + "/RefreshToken";
             public const string ValidateToken = Perfix + "/ValidateToken";
+            public const string ConfirmEmail = "/Api/Authentication/ConfirmEmail";
+            public const string SendResetPassword = Perfix + "/SendResetPassword";
+
+
+
+
 
 
 
 
         }
+        public static class Email
+        {
+            public const string Perfix = Rule + "Email";
+            public const string SendEmail = Perfix + "/SendEmail";
+
+
+
+
+
+
+        }
+
         public static class AuthorizeRoute
         {
             /// <summary>

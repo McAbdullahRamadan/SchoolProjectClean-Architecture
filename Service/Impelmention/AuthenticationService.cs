@@ -1,6 +1,7 @@
 ﻿using Data.Entites.Identity;
 using Data.Helpers;
 using Infrastructure.AbstractRepository;
+using Infrastructure.DataContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,18 +21,24 @@ namespace Service.Impelmention
 
         private readonly IRefreshTokenRepository _refreshTokenRepository;
         private readonly UserManager<UserIdentity> _userManager;
+        private readonly IEmailsService _emailsService;
+        private readonly ApplicationDbContext _dbContext;
+
+
+
 
         #endregion
         #region Constructors
         public AuthenticationService(JwtSettings jwtSettings,
-            UserManager<UserIdentity> userManager, IRefreshTokenRepository refreshTokenRepository, ConcurrentDictionary<string, RefreshToken> UserRefresh)
+            UserManager<UserIdentity> userManager, ApplicationDbContext dbContext, IEmailsService emailsService, IRefreshTokenRepository refreshTokenRepository, ConcurrentDictionary<string, RefreshToken> UserRefresh)
         {
             _jwtSettings = jwtSettings;
 
             _refreshTokenRepository = refreshTokenRepository;
 
             _userManager = userManager;
-
+            _emailsService = emailsService;
+            _dbContext = dbContext;
         }
         #endregion
         #region Handle Function
@@ -216,6 +223,51 @@ namespace Service.Impelmention
             }
             var expiredate = userRefreshToken.ExpiryDate;
             return (userId, expiredate);
+        }
+
+        public async Task<string> ConfirmEmail(int? userId, string? code)
+        {
+            if (userId == null || code == null)
+                return "ErrorWhenConfirmEmail";
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var confirmEmail = await _userManager.ConfirmEmailAsync(user, code);
+            if (!confirmEmail.Succeeded)
+                return "ErrorWhenConfirmEmail";
+            return "Success";
+
+        }
+
+        public async Task<string> SendResetPasswordCode(string email)
+        {
+            var trans = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                //Get User
+                var user = await _userManager.FindByEmailAsync(email);
+                //User Not exist =>Not Found
+                if (user == null)
+                    return "UserNotFound";
+                //Generate Random Number
+                Random Generator = new Random();
+                string randomnumber = Generator.Next(0, 1000000).ToString("D6");
+                //Update Database
+                user.Code = randomnumber;
+                var updatedata = await _userManager.UpdateAsync(user);
+                if (!updatedata.Succeeded)
+                    return "ErrorInUpdateUser";
+                var message = "Code To Reset Password : " + user.Code;
+                //Send Code To Email
+                await _emailsService.SendEmails(user.Email, message, "Reset Password");
+                await trans.CommitAsync();
+                //Success
+                return "Success";
+
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync();
+                return "Failed";
+            }
         }
 
         #endregion

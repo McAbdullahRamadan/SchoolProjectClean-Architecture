@@ -129,6 +129,9 @@
   <data name="ChangePassSuccess" xml:space="preserve">
     <value>تم تغيير كلمة السر بنجاح</value>
   </data>
+  <data name="ConfirmEmailIsDone" xml:space="preserve">
+    <value>تم تأكيد البريد الالكتروني بنجاح</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>تم الانشاء بنجاح</value>
   </data>
@@ -147,6 +150,12 @@
   <data name="EmailIsExist" xml:space="preserve">
     <value>البريد الالكتروني موجود بالفعل</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>البريد الالكتروني غير مؤكد</value>
+  </data>
+  <data name="ErrorWhenConfirmEmail" xml:space="preserve">
+    <value>حدث خطأ أثناء تأكيد البريد الالكتروني</value>
+  </data>
   <data name="FailedToAddNewClaims" xml:space="preserve">
     <value>فشل في اضافة المطالبات</value>
   </data>
@@ -164,6 +173,9 @@
   </data>
   <data name="FialedToAddNewRoles" xml:space="preserve">
     <value>تم رفض اضافة صلاحية جديدة</value>
+  </data>
+  <data name="FialedToAddUser" xml:space="preserve">
+    <value>فشل في اضافة المستخدم</value>
   </data>
   <data name="FialedToAddUserRole" xml:space="preserve">
     <value>فشل في اضافة مستخدم الصلاحية</value>
@@ -207,6 +219,9 @@
   <data name="RoleNotExist" xml:space="preserve">
     <value>هذة الصلاحية غير متاحة</value>
   </data>
+  <data name="SendEmailFailed" xml:space="preserve">
+    <value>حدث خطأ اثناء ارسال البريد الالكتروني</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العملية بنجاح</value>
   </data>
@@ -215,6 +230,12 @@
   </data>
   <data name="TokenisNotExpired" xml:space="preserve">
     <value>الرمز غير منتهي الصلاحية</value>
+  </data>
+  <data name="TryAgainInAnotherTime" xml:space="preserve">
+    <value>حدث خطأ أفي عملية الارسال من فضلك حاول مرة اخري في وقت لاحق</value>
+  </data>
+  <data name="TryToRegisterAgain" xml:space="preserve">
+    <value>حدث خطأ غير متوقع اعد المحاولة مرة اخري</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
     <value>غير مصرح به</value>
