@@ -276,7 +276,7 @@ namespace Service.Impelmention
             }
         }
 
-        public async Task<string> ResetPasswordCode(string email, string code)
+        public async Task<string> ConfirmResetPasswordCode(string email, string code)
         {
             //Get User
             var user = await _userManager.FindByEmailAsync(email);
@@ -289,6 +289,27 @@ namespace Service.Impelmention
 
             if (usercode == code) return "Success";
             return "Falied";
+        }
+
+        public async Task<string> ResetPassword(string email, string Password)
+        {
+            var trans = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null)
+                    return "UserNotFound";
+                await _userManager.RemovePasswordAsync(user);
+                await _userManager.AddPasswordAsync(user, Password);
+                await trans.CommitAsync();
+                return "Success";
+
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync();
+                return "Falied";
+            }
         }
 
         #endregion

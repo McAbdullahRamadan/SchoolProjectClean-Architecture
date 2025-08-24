@@ -14,7 +14,10 @@ namespace Core.Features.Authentication.Command.Handle
     public class AuthenticationUserHandleCommand : ResponseHadlar,
         IRequestHandler<SignInCommand, Response<JwtAuthResult>>,
         IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>,
-        IRequestHandler<SendResetPasswordCommand, Response<string>>
+        IRequestHandler<SendResetPasswordCommand, Response<string>>,
+        IRequestHandler<ResetPasswordCommand, Response<string>>
+
+
 
 
     {
@@ -51,17 +54,18 @@ namespace Core.Features.Authentication.Command.Handle
             if (user == null)
                 return BadRequst<JwtAuthResult>(_Localizer[KeySharedResource.UserNameIsinvalid]);
 
-            var singInUser = _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+            var singInUser = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+
+            //if Failed return passeord is worng
+            if (!singInUser.Succeeded)
+                return BadRequst<JwtAuthResult>(_Localizer[KeySharedResource.PasswordIsNotCorrect]);
             //confirm email
             if (!user.EmailConfirmed)
                 return BadRequst<JwtAuthResult>(_Localizer[KeySharedResource.EmailNotConfirmed]);
-            //if Failed return passeord is worng
-            if (!singInUser.IsCompletedSuccessfully)
-                return BadRequst<JwtAuthResult>(_Localizer[KeySharedResource.PasswordIsNotCorrect]);
             //genrate Token
-            var accessToken = await _authenticationService.GetJWTToken(user);
+            var result = await _authenticationService.GetJWTToken(user);
             //return Token
-            return Success(accessToken);
+            return Success(result);
 
 
 
@@ -101,6 +105,20 @@ namespace Core.Features.Authentication.Command.Handle
                 case "Failed": return BadRequst<string>(_Localizer[KeySharedResource.TryAgainInAnotherTime]);
                 case "Success": return Success<string>("");
                 default: return BadRequst<string>(_Localizer[KeySharedResource.TryAgainInAnotherTime]);
+
+            }
+        }
+
+        public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ResetPassword(request.Email, request.Password);
+            switch (result)
+
+            {
+                case "UserNotFound": return BadRequst<string>(_Localizer[KeySharedResource.userIsNotFound]);
+                case "Failed": return BadRequst<string>(_Localizer[KeySharedResource.InvalidCode]);
+                case "Success": return Success<string>("");
+                default: return BadRequst<string>(_Localizer[KeySharedResource.InvalidCode]);
 
             }
         }

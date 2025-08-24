@@ -36,15 +36,21 @@ namespace SchoolLearnAPI.Controllers
             return NewResult(response);
         }
         [HttpPost(Router.Authentication.SendResetPassword)]
-        public async Task<IActionResult> SendResetPassword([FromQuery] SendResetPasswordCommand Query)
+        public async Task<IActionResult> SendResetPassword([FromQuery] SendResetPasswordCommand Command)
+        {
+            var response = await Mediator.Send(Command);
+            return NewResult(response);
+        }
+        [HttpGet(Router.Authentication.ConfirmResetPasswordQuery)]
+        public async Task<IActionResult> ConfirmResetPasswordCode([FromQuery] ConfirmResetPasswordQuery Query)
         {
             var response = await Mediator.Send(Query);
             return NewResult(response);
         }
-        [HttpGet(Router.Authentication.ConfirmResetPasswordQuery)]
-        public async Task<IActionResult> ResetPasswordCode([FromQuery] ConfirmResetPasswordQuery Query)
+        [HttpPost(Router.Authentication.ResetPassword)]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordCommand Command)
         {
-            var response = await Mediator.Send(Query);
+            var response = await Mediator.Send(Command);
             return NewResult(response);
         }
 
