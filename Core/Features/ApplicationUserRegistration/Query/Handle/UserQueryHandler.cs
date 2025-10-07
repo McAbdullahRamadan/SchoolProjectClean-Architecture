@@ -12,7 +12,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Core.Features.UserRegistration.Query.Handle
 {
-    public class UserQueryHandler : ResponseHadlar,
+    public class UserQueryHandler : ResponseHandlar,
         IRequestHandler<GetUserListPaginationQuery, PaginatedResult<GetUserListResponse>>,
         IRequestHandler<GetUserByIdQuery, Response<GetUserByIdResponse>>
 

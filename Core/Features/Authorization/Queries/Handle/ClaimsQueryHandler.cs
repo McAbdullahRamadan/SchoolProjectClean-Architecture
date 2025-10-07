@@ -10,7 +10,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Authorization.Queries.Handle
 {
-    public class ClaimsQueryHandler : ResponseHadlar,
+    public class ClaimsQueryHandler : ResponseHandlar,
         IRequestHandler<ManageUserClaimsQuery, Response<ManageUserClaimsResult>>
     {
         #region Fialds

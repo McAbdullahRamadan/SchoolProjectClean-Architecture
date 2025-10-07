@@ -7,7 +7,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Authorization.Command.Handle
 {
-    public class RoleCommandHandler : ResponseHadlar,
+    public class RoleCommandHandler : ResponseHandlar,
         IRequestHandler<AddRoleCommand, Response<string>>,
         IRequestHandler<EditRoleCommand, Response<string>>,
         IRequestHandler<DeleteRoleCommand, Response<string>>,

@@ -11,7 +11,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Authentication.Command.Handle
 {
-    public class AuthenticationUserHandleCommand : ResponseHadlar,
+    public class AuthenticationUserHandleCommand : ResponseHandlar,
         IRequestHandler<SignInCommand, Response<JwtAuthResult>>,
         IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>,
         IRequestHandler<SendResetPasswordCommand, Response<string>>,

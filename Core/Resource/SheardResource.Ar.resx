@@ -171,6 +171,9 @@
   <data name="FailedToUpdateClaims" xml:space="preserve">
     <value>فشل في تحديث المطالبات</value>
   </data>
+  <data name="FailedToUpload" xml:space="preserve">
+    <value>فشل في ارفاق الملف</value>
+  </data>
   <data name="FialedToAddNewRoles" xml:space="preserve">
     <value>تم رفض اضافة صلاحية جديدة</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="NotEmtpy" xml:space="preserve">
     <value>لا يمكن ترك الحقل فارغ</value>
+  </data>
+  <data name="NotImage" xml:space="preserve">
+    <value>لا توجد صورة</value>
   </data>
   <data name="NotNull" xml:space="preserve">
     <value>الحقل فارغ</value>

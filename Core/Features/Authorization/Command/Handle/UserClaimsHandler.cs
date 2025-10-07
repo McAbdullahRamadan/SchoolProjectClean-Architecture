@@ -7,7 +7,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Authorization.Command.Handle
 {
-    public class UserClaimsHandler : ResponseHadlar,
+    public class UserClaimsHandler : ResponseHandlar,
         IRequestHandler<UpdateUserClaimsCommand, Response<string>>
     {
         #region Fialdes

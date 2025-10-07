@@ -60,7 +60,7 @@ namespace Service.Impelmention
                 var requestAccessor = _httpContextAccessor.HttpContext.Request;
                 var returnUrl = requestAccessor.Scheme + "://" + requestAccessor.Host +
                     _urlHelper.Action("ConfirmEmail", "Authentication", new { userId = user.Id, code = code });
-                var messsage = $"To Confirm Email Click Link: <a href='{returnUrl}'></a>";
+                var messsage = $"Click Link ConfirmEmail : <a href='{returnUrl}'></a>";
                 //$"/api/Authentication/Api/V1/Authentication/ConfirmEmail?userId={user.Id}&code={code}";
                 //Message or body
                 await _emailsServic.SendEmails(user.Email, returnUrl, "Confirm Email");

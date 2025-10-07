@@ -12,7 +12,7 @@ using Service.Abstruct;
 
 namespace Core.Features.UserRegistration.Command.Handle
 {
-    public class UserCommandHandle : ResponseHadlar,
+    public class UserCommandHandle : ResponseHandlar,
         IRequestHandler<AddUserCommand, Response<string>>,
         IRequestHandler<EditUserCommand, Response<string>>,
         IRequestHandler<DeleteUserCommand, Response<string>>,

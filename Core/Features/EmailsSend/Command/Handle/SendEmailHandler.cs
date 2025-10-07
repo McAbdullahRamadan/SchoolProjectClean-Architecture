@@ -7,7 +7,7 @@ using Service.Abstruct;
 
 namespace Core.Features.EmailsSend.Command.Handle
 {
-    public class SendEmailHandler : ResponseHadlar,
+    public class SendEmailHandler : ResponseHandlar,
                                         IRequestHandler<SendEmailCommand, Response<string>>
     {
         #region Fields

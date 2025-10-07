@@ -1,6 +1,7 @@
 ﻿using Core.Features.Students.Commands.Models;
 using Core.Features.Students.Queries.Handlers;
 using Core.Features.Students.Queries.Models;
+using Core.Filter;
 using Data.AppRouting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +10,14 @@ using SchoolLearnAPI.Base;
 namespace SchoolLearnAPI.Controllers
 {
 
+
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class StudentController : AppControllerBase
     {
-
-        [Authorize(Policy = "CreateStudent")]
         [HttpGet(Router.StudentRouter.list)]
+        [Authorize(Roles = "User")]
+        [ServiceFilter(typeof(AuthFilter))]
         public async Task<IActionResult> GetAllStudent()
         {
             var response = await Mediator.Send(new GetListStudentQueries());

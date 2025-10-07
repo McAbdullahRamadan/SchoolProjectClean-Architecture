@@ -7,7 +7,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Authentication.Queries.Handle
 {
-    public class AuthenticationUserHandleQuery : ResponseHadlar,
+    public class AuthenticationUserHandleQuery : ResponseHandlar,
 
         IRequestHandler<AuthorizeUserQuery, Response<string>>,
         IRequestHandler<ConfirmEmailQuery, Response<string>>,
@@ -62,7 +62,7 @@ namespace Core.Features.Authentication.Queries.Handle
 
         public async Task<Response<string>> Handle(ConfirmResetPasswordQuery request, CancellationToken cancellationToken)
         {
-            var result = await _authenticationService.ResetPasswordCode(request.Email, request.Code);
+            var result = await _authenticationService.ConfirmResetPasswordCode(request.Email, request.Code);
             switch (result)
 
             {

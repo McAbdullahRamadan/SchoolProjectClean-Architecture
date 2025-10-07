@@ -1,4 +1,5 @@
 using Core;
+using Core.Filter;
 using Data.Entites.Identity;
 using Infrastructure;
 using Infrastructure.DataContext;
@@ -119,7 +120,7 @@ builder.Services.AddTransient<IUrlHelper>(x =>
     var factory = x.GetRequiredService<IUrlHelperFactory>();
     return factory.GetUrlHelper(actionContext);
 });
-
+builder.Services.AddTransient<AuthFilter>();
 
 var app = builder.Build();
 using (var scop = app.Services.CreateScope())
@@ -142,7 +143,7 @@ app.UseRequestLocalization(options.Value);
 app.UseHttpsRedirection();
 
 app.UseCors(Cors);
-
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

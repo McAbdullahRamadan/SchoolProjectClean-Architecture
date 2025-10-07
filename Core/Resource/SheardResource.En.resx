@@ -168,6 +168,9 @@
   <data name="FailedToUpdateClaims" xml:space="preserve">
     <value>Failed To Update Claims</value>
   </data>
+  <data name="FailedToUpload" xml:space="preserve">
+    <value>Failed To Upload</value>
+  </data>
   <data name="FialedToAddNewRoles" xml:space="preserve">
     <value>Fialed To Add New Roles</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="NoFound" xml:space="preserve">
     <value>No Found</value>
+  </data>
+  <data name="NoImage" xml:space="preserve">
+    <value>NoImage</value>
   </data>
   <data name="NotEmtpy" xml:space="preserve">
     <value>NotEmtpy</value>

@@ -8,7 +8,7 @@ namespace SchoolLearnAPI.Controllers
 {
 
 
-
+    [ApiController]
     public class AuthenticationController : AppControllerBase
     {
         [HttpPost(Router.Authentication.SignIn)]

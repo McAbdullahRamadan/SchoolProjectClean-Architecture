@@ -5,7 +5,6 @@ using SchoolLearnAPI.Base;
 
 namespace SchoolLearnAPI.Controllers
 {
-
     [ApiController]
     public class DepartmentController : AppControllerBase
     {

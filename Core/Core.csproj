@@ -20,6 +20,9 @@
     <Folder Include="Features\EmailsSend\Query\Handle\" />
     <Folder Include="Features\EmailsSend\Query\Models\" />
     <Folder Include="Features\EmailsSend\Query\Valiadtors\" />
+    <Folder Include="Features\Instractor\Queries\Command\" />
+    <Folder Include="Features\Instractor\Queries\Handle\" />
+    <Folder Include="Features\Instractor\Queries\Model\" />
     <Folder Include="Features\Mapping\CommandMapp\" />
     <Folder Include="Features\Mapping\DepartmentMapp\CommandMapping\" />
     <Folder Include="Features\Students\Handels\" />

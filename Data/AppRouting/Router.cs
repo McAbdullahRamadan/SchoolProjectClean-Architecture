@@ -63,12 +63,14 @@
             public const string Perfix = Rule + "Email";
             public const string SendEmail = Perfix + "/SendEmail";
 
-
-
-
-
+        }
+        public static class InstructorRouting
+        {
+            public const string Perfix = Rule + "InstructorRouting";
+            public const string AddInstructor = Perfix + "/Create";
 
         }
+
 
         public static class AuthorizeRoute
         {

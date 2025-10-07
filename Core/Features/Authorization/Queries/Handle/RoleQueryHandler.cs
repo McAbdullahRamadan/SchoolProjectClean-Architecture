@@ -12,7 +12,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Authorization.Queries.Handle
 {
-    public class RoleQueryHandler : ResponseHadlar,
+    public class RoleQueryHandler : ResponseHandlar,
         IRequestHandler<GetRolesListQuery, Response<List<GetRolesListResult>>>,
         IRequestHandler<GetRoleByIdQuery, Response<GetRoleByIdResult>>,
         IRequestHandler<ManageUserRoleQuery, Response<ManageUserRoleResult>>

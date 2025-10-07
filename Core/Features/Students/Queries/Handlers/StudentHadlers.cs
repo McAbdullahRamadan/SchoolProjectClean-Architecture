@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 
 namespace Core.Features.Students.Queries.Handlers
 {
-    public class StudentHadlers : ResponseHadlar,
+    public class StudentHadlers : ResponseHandlar,
         IRequestHandler<GetListStudentQueries, Response<List<GetSudentListResult>>>,
         IRequestHandler<GetStudentByIdQueries, Response<GetSingleStudentResponse>>,
         IRequestHandler<GetStudentPaginatedListQuery, PaginatedResult<GetStudentpaginatedListResponse>>

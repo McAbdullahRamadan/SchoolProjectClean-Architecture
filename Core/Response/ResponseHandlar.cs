@@ -3,15 +3,11 @@ using Microsoft.Extensions.Localization;
 
 namespace Core.Besec
 {
-    public class ResponseHadlar
+    public class ResponseHandlar
     {
-        private readonly IStringLocalizer<SheardResource> _Localizer;
+      
 
-        public ResponseHadlar(IStringLocalizer<SheardResource> Localizer)
-        {
-            _Localizer = Localizer;
-
-
+        
         }
         public Response<T> Deleted<T>(string message = null)
         {
