@@ -30,6 +30,10 @@ namespace Service.Impelmention
             return resultStudent;
 
         }
+        public async Task<bool> IsDEpartmentIdExist(int Department)
+        {
+            return await _departmentRepository.GetTableNoTracking().AnyAsync(x => x.DID.Equals(Department));
+        }
         #endregion
     }
 }

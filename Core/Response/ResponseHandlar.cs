@@ -1,0 +1,90 @@
+﻿using Core.Resource;
+using Microsoft.Extensions.Localization;
+
+namespace Core.Besec
+{
+    public class ResponseHandlar
+    {
+      
+
+        
+        }
+        public Response<T> Deleted<T>(string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Succeeded = true,
+                Message = message == null ? _Localizer[KeySharedResource.Deleted] : message,
+
+
+            };
+        }
+        public Response<T> Success<T>(T entites, object meta = null)
+        {
+            return new Response<T>()
+            {
+                Data = entites,
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Succeeded = true,
+                Meta = meta,
+                Message = _Localizer[KeySharedResource.Success]
+            };
+        }
+        public Response<T> Created<T>(T entites, object meta = null)
+        {
+            return new Response<T>()
+            {
+                Data = entites,
+                StatusCode = System.Net.HttpStatusCode.Created,
+                Succeeded = true,
+                Message = _Localizer[KeySharedResource.Create],
+                Meta = meta,
+            };
+        }
+        public Response<T> Unauthorized<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.Unauthorized,
+                Succeeded = true,
+
+                Message = Message == null ? _Localizer[KeySharedResource.Unauthorized] : Message,
+            };
+        }
+        public Response<T> UnprocessableEntity<T>(string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+
+                Succeeded = false,
+                Message = message == null ? "Unprocessable Entity" : message,
+
+            };
+        }
+        public Response<T> BadRequst<T>(string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.BadRequest,
+                Succeeded = false,
+                Message = message == null ? "BadRequst" : message,
+            };
+        }
+        public Response<T> NotFound<T>(string message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.NotFound,
+
+                Succeeded = false,
+                Message = message == null ? _Localizer[KeySharedResource.NoFound] : message,
+
+            };
+        }
+
+
+
+    }
+}

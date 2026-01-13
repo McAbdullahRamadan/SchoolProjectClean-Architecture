@@ -1,23 +1,29 @@
 ﻿using Core.Features.Students.Commands.Models;
 using Core.Features.Students.Queries.Handlers;
 using Core.Features.Students.Queries.Models;
+using Core.Filter;
 using Data.AppRouting;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolLearnAPI.Base;
 
 namespace SchoolLearnAPI.Controllers
 {
 
+
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class StudentController : AppControllerBase
     {
-
         [HttpGet(Router.StudentRouter.list)]
+        [Authorize(Roles = "User")]
+        [ServiceFilter(typeof(AuthFilter))]
         public async Task<IActionResult> GetAllStudent()
         {
             var response = await Mediator.Send(new GetListStudentQueries());
             return Ok(response);
         }
+        [AllowAnonymous]
         [HttpGet(Router.StudentRouter.Paginated)]
         public async Task<IActionResult> Paginated([FromQuery] GetStudentPaginatedListQuery query)
         {

@@ -14,7 +14,7 @@ using static Core.Features.Department.Queries.Result.GetDepartmentByIdResponse;
 namespace Core.Features.Department.Queries.Handles
 {
 
-    public class HandleDepartmentQuery : ResponseHadlar,
+    public class HandleDepartmentQuery : ResponseHandlar,
       IRequestHandler<GetDepartmentByIdQuery, Response<GetDepartmentByIdResponse>>
     {
         #region Fields

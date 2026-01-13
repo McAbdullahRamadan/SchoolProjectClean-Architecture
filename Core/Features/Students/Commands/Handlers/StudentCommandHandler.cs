@@ -9,7 +9,7 @@ using Service.Abstruct;
 
 namespace Core.Features.Students.Commands.Handlers
 {
-    public class StudentCommandHandler : ResponseHadlar,
+    public class StudentCommandHandler : ResponseHandlar,
                                         IRequestHandler<AddStudentComand, Response<string>>,
                                         IRequestHandler<EditStudentCommand, Response<string>>,
                                         IRequestHandler<DeleteStudentComand, Response<string>>
